@@ -1,4 +1,6 @@
 import axios from 'axios'
+import pipedriveParser from '../../../shared/utils/pipedriveParser'
+import { buildXML } from '../../../shared/utils/xmlCreator'
 
 // interface IResponse {
 // deal: string,
@@ -6,41 +8,31 @@ import axios from 'axios'
 // status: boolean,
 // }
 
-interface transaction {
-org_name: string,
-cc_email: string,
-value: number,
-products_count: number,
-org_id: {
-  address: string
-}
-}
+// interface IResponse {
+//  cliente: {
+//    nome: string,
+//    endereco: string,
+//    email: string,
+//  },
+//  volume: {
+//    servico: string
+//  },
+//  item: {
+//    descricao: string,
+//    qtde: number,
+//    vlr_unit: number
+//  }
+// }
+
 
 class IntegrationParseService {
-  public async getPipedriveData(): Promise<any>{
-    const response = await axios.get(`https://api.pipedrive.com/v1/deals?start=0&api_token=${process.env.PIPEDRIVER_API_KEY}`)
+  public async execute(){
 
-    const parsedResponse = response.data.data.map((transaction: transaction, index: number) => {
-      const newStructure = {
-        client: {
-          name: transaction.org_name,
-          address: transaction.org_id.address,
-          email: transaction.cc_email
-        },
-        volume: {
-          freightService: 'SEDEX - CONTRATO',
-          freightType: 'R',
-        },
-        item: {
-          description: `Pedido de número ${index + 1}`,
-          quantity: transaction.products_count,
-          value: transaction.value
-        }
-      }
-      return newStructure
-    })
+    const pipedriveData = await pipedriveParser()
 
-    return parsedResponse
+    const xml = await pipedriveData.map((transaction) => buildXML(transaction))
+
+    return xml
   }
 }
 

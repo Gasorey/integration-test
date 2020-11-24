@@ -6,7 +6,7 @@ export default class IntegrationController {
     try{
       const integrationParse = new IntegrationParseService()
 
-      const integration = await integrationParse.getPipedriveData()
+      const integration = await integrationParse.execute()
 
       return response.json(integration)
 
