@@ -1,0 +1,14 @@
+[
+  {
+    "name":"integration-test",
+    "type":"mongodb",
+    "host":"localhost",
+    "port":27017,
+    "database":"integrationTest",
+    "useUnifiedTopology":true,
+    "entities":[
+      "./src/modules/**/infra/typeorm/schemas/*.ts"
+    ],
+    "logging": ["error"]
+  }
+]
