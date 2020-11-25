@@ -6,11 +6,9 @@
     "port":27017,
     "database":"integration-test",
     "useUnifiedTopology":true,
+    "synchronize": true,
     "entities":[
       "./src/modules/**/infra/typeorm/schemas/*.ts"
-    ],
-    "migrations":[
-      "./src/shared/infra/typeorm/migrations/*.ts"
     ],
     "cli": {
       "migrationsDir":"./src/shared/infra/typeorm/migrations/"

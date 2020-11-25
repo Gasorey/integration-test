@@ -8,36 +8,36 @@ import {
 import IIntegrationDataDTO from '../../../dtos/IIntegrationDataDTO'
 
 
-@Entity('integration-test')
+@Entity()
 class IntegrationData {
   @ObjectIdColumn()
   id: ObjectID
 
   @Column()
-  data: Date
+  status: number
 
   @Column()
-  cliente: {
-    nome: string,
-    endereco: string,
-    email: string,
-  }
+  statusText: string
 
   @Column()
-  volume: {
-    servico: string
-  }
-
-  @Column()
-  items: {
-    item: {
-      codigo: string,
-      descricao: string,
-      qtde: number,
-      vlr_unit: number
+  data: {
+    cliente: {
+      nome: string,
+      endereco: string,
+      email: string,
+    },
+    volume: {
+      servico: string
+    },
+    items: {
+      item: {
+        codigo: string,
+        descricao: string,
+        qtde: number,
+        vlr_unit: number
+      }
     }
   }
-
 
   @CreateDateColumn()
   created_at: Date

@@ -5,6 +5,6 @@ import IntegrationDataRepository from '../../modules/integration/infra/typeorm/r
 
 
 container.registerSingleton<IIntegrationDataRepository>(
-  'IntegrationRepository',
+  'IntegrationDataRepository',
   IntegrationDataRepository
 )

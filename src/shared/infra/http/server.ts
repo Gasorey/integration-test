@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 import 'dotenv/config';
-import '../../container'
+import '../../container';
+import '../../infra/typeorm'
 import express from 'express'
 import cors from 'cors'
 import routes from './routes'
