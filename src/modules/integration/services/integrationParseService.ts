@@ -1,38 +1,28 @@
 import axios from 'axios'
+import blingPost from '../../../shared/utils/blingIntegration'
 import pipedriveParser from '../../../shared/utils/pipedriveParser'
 import { buildXML } from '../../../shared/utils/xmlCreator'
+import {injectable, inject} from 'tsyringe'
+import IIntegrationDataRepository from '../repositories/IIntegrationDataRepository'
 
-// interface IResponse {
-// deal: string,
-// value: number,
-// status: boolean,
-// }
-
-// interface IResponse {
-//  cliente: {
-//    nome: string,
-//    endereco: string,
-//    email: string,
-//  },
-//  volume: {
-//    servico: string
-//  },
-//  item: {
-//    descricao: string,
-//    qtde: number,
-//    vlr_unit: number
-//  }
-// }
-
-
+@injectable()
 class IntegrationParseService {
+  constructor(
+
+    @inject('IntegrationRepository')
+    private integrationRepository: IIntegrationDataRepository
+
+  ){}
+
   public async execute(){
 
     const pipedriveData = await pipedriveParser()
 
-    const xml = await pipedriveData.map((transaction) => buildXML(transaction))
+    const xml = pipedriveData.map((transaction) => buildXML(transaction))
 
-    return xml
+    const blingResult = blingPost(xml[0])
+
+    return blingResult
   }
 }
 

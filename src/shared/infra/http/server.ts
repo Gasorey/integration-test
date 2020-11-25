@@ -1,8 +1,9 @@
+import 'reflect-metadata';
 import 'dotenv/config';
+import '../../container'
 import express from 'express'
 import cors from 'cors'
 import routes from './routes'
-
 
 
 const app = express()

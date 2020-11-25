@@ -1,14 +1,20 @@
 [
   {
-    "name":"integration-test",
+    "name":"default",
     "type":"mongodb",
     "host":"localhost",
     "port":27017,
-    "database":"integrationTest",
+    "database":"integration-test",
     "useUnifiedTopology":true,
     "entities":[
       "./src/modules/**/infra/typeorm/schemas/*.ts"
     ],
+    "migrations":[
+      "./src/shared/infra/typeorm/migrations/*.ts"
+    ],
+    "cli": {
+      "migrationsDir":"./src/shared/infra/typeorm/migrations/"
+    },
     "logging": ["error"]
   }
 ]
