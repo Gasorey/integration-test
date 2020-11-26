@@ -23,6 +23,38 @@ yarn dev:server
 yarn build
 ```
 
+<h2>Exemplo de response</h2>
+
+```
+{
+    "Consolidado": [
+        {
+            "data": "2020/11/07",
+            "total_negociado": "R$ 99750"
+        },
+        {
+            "data": "2020/11/23",
+            "total_negociado": "R$ 79450"
+        },
+        {
+            "data": "2020/11/26",
+            "total_negociado": "R$ 47500"
+        }
+    ],
+    "integrationStatus": {
+        "blingStatus": "Nenhum pedido de venda novo",
+        "pipedriveStatus": "Dados coletados"
+    }
+}
+```
+<p>
+Consolidado: Resultado agregado por dia e valor,
+IntegrationStatus: {
+  blingStatus: Informa se houve post de novos pedidos, caso sim informa quantos novos pedidos,
+  pipedriveStatus: Informa conseguiu realizar a coleta dos dados do pipedrive, caso não, retorna status code e status text
+}
+</p>
+
 <h2>Postman</h2>
 
 
