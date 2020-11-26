@@ -25,9 +25,6 @@ yarn build
 
 <h2>Postman</h2>
 
-```
+
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/6f7d2e96be5b56dcb845)
-
-```
-
 
