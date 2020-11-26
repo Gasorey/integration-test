@@ -1,6 +1,6 @@
 import axios from 'axios'
 import qs from 'qs'
-import { XMLtoJSON } from './xmlCreator'
+import { XMLtoJSON } from '@shared/utils/XMLCreator'
 
 const  blingPost = async (data: string) => {
   const requestBody = qs.stringify({

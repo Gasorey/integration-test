@@ -1,3 +1,4 @@
+import sort from 'fast-sort'
 interface AggragateArray {
  _id: string,
  total: number
@@ -12,7 +13,11 @@ const AggregateFormatter = (obj:AggragateArray[]) => {
     }
     return newObj
   })
+  sort(newFormat).asc([
+    "data"
+  ])
   return newFormat
+
 }
 
 export default AggregateFormatter

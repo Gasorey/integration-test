@@ -1,8 +1,8 @@
-import blingPost from '../../../shared/utils/blingIntegration'
-import pipedriveParser from '../../../shared/utils/pipedriveParser'
-import { buildXML } from '../../../shared/utils/xmlCreator'
+import blingPost from '@shared/utils/BlingIntegration'
+import pipedriveParser from '@shared/utils/PipedriveIntegration'
+import { buildXML } from '@shared/utils/XMLCreator'
 import {injectable, inject} from 'tsyringe'
-import IIntegrationDataMongoClass from '../repositories/IIntegrationDataMongoClass'
+import IIntegrationRepository from '@modules/integration/repositories/IIntegrationRepository'
 import connect from '../../../shared/infra/mongoose'
 import AggregateFormatter from '../../../shared/utils/AggregateFormatter'
 interface order {
@@ -30,10 +30,10 @@ interface order {
 }
 
 @injectable()
-class IntegrationParseService {
+class IntegrationService {
   constructor(
-    @inject('IntegrationDataRepositoryMongo')
-    private integrationMongo: IIntegrationDataMongoClass,
+    @inject('IntegrationRepository')
+    private integrationMongo: IIntegrationRepository,
 
   ){}
 
@@ -61,4 +61,4 @@ class IntegrationParseService {
   }
 }
 
-export default IntegrationParseService
+export default IntegrationService

@@ -1,5 +1,5 @@
 import {Router} from 'express'
-import IntegrationController from '../controllers/IntegrationController'
+import IntegrationController from '@modules/integration/infra/http/controllers/IntegrationController'
 
 const integrationRouter = Router()
 

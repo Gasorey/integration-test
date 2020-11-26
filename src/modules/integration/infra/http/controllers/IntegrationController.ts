@@ -1,6 +1,6 @@
 import {container} from 'tsyringe'
 import {Request, Response} from 'express'
-import IntegrationParseService from '../../../services/integrationParseService'
+import IntegrationParseService from '@modules/integration/services/integrationService'
 
 export default class IntegrationController {
   public async index(request: Request, response: Response): Promise<Response>{

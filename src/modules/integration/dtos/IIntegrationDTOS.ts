@@ -1,4 +1,4 @@
-export interface IIntegrationDataDTO {
+export interface IIntegrationDTO {
   data: string,
   cliente: {
     nome: string,
@@ -18,7 +18,7 @@ export interface IIntegrationDataDTO {
   }
 }
 
-export interface IAggregateDataDTO {
+export interface IAggregateDTO {
   data: string,
   value: number,
 }

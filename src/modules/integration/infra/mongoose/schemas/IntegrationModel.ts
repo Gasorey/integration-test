@@ -28,7 +28,7 @@ const IntegrationDataSchema = new mongoose.Schema({
  }
 )
 
-const IntegrationDataMongo = mongoose.model('integrationData', IntegrationDataSchema)
+const IntegrationModel = mongoose.model('integrationData', IntegrationDataSchema)
 
-export default IntegrationDataMongo
+export default IntegrationModel
 

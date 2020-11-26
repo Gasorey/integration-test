@@ -1,12 +1,12 @@
 import 'reflect-metadata';
 import 'dotenv/config';
-import '../../container';
-import '../../infra/typeorm'
+
 import 'express-async-errors';
+
 import express from 'express'
 import cors from 'cors'
-import routes from './routes'
-import connect from '../mongoose'
+import '@shared/container';
+import routes from '@shared/infra/http/routes'
 
 const app = express()
 
