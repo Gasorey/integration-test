@@ -1,10 +1,9 @@
 import {container} from 'tsyringe'
 
-import IIntegrationDataRepository from '../../modules/integration/repositories/IIntegrationDataRepository'
-import IntegrationDataRepository from '../../modules/integration/infra/typeorm/repositories/IntegrationDataRepository'
+import IIntegrationDataMongoClass from 'modules/integration/repositories/IIntegrationDataMongoClass'
+import IntegrationDataMongoClass from '../../modules/integration/infra/mongoose/repositories/IntegrationDataMongoRepository'
 
-
-container.registerSingleton<IIntegrationDataRepository>(
-  'IntegrationDataRepository',
-  IntegrationDataRepository
+container.registerSingleton<IIntegrationDataMongoClass>(
+  'IntegrationDataRepositoryMongo',
+  IntegrationDataMongoClass
 )

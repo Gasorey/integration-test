@@ -1,11 +1,5 @@
-export default interface IIntegrationDataDTO {
-
-status: number,
-
-statusText: string,
-
-data:{
-  data: Date,
+export interface IIntegrationDataDTO {
+  data: string,
   cliente: {
     nome: string,
     endereco: string,
@@ -23,4 +17,9 @@ data:{
     }
   }
 }
+
+export interface IAggregateDataDTO {
+  data: string,
+  value: number,
 }
+

@@ -1,10 +1,10 @@
-import axios from 'axios'
 import blingPost from '../../../shared/utils/blingIntegration'
 import pipedriveParser from '../../../shared/utils/pipedriveParser'
 import { buildXML } from '../../../shared/utils/xmlCreator'
 import {injectable, inject} from 'tsyringe'
-import IIntegrationDataRepository from '../repositories/IIntegrationDataRepository'
-
+import IIntegrationDataMongoClass from '../repositories/IIntegrationDataMongoClass'
+import connect from '../../../shared/infra/mongoose'
+import AggregateFormatter from '../../../shared/utils/AggregateFormatter'
 interface order {
   status: number,
   statusText: string,
@@ -32,13 +32,14 @@ interface order {
 @injectable()
 class IntegrationParseService {
   constructor(
-
-    @inject('IntegrationDataRepository')
-    private integrationRepository: IIntegrationDataRepository
+    @inject('IntegrationDataRepositoryMongo')
+    private integrationMongo: IIntegrationDataMongoClass,
 
   ){}
 
   public async execute(){
+
+    await connect()
 
     const pipedriveData = await pipedriveParser()
 
@@ -46,13 +47,17 @@ class IntegrationParseService {
 
     const blingResult = blingPost(xml[0])
 
-    const bling = xml.map(async (order) => await blingPost(order))
+    const bling = await Promise.all(xml.map(async (order) => await blingPost(order)))
 
-    const createdOrders = bling.filter(async (order) => (await order).status === 201)
+    const createdOrders = bling.filter((order) => order.status === 201)
 
-    const postOnMongo = createdOrders.map(async (order) => await this.integrationRepository.create(await order))
+    createdOrders.map(async (order) => await this.integrationMongo.create(order.data))
 
-    return blingResult
+    const mongoAggregate = await this.integrationMongo.aggregate()
+
+    const formatted = AggregateFormatter(mongoAggregate)
+
+    return formatted
   }
 }
 

@@ -1,52 +1,5 @@
 import xml2js from 'xml2js'
-
-// interface JsonObject {
-// root: {
-//   data: [
-//     string
-//   ],
-//   cliente: [
-//     {
-//       nome: [
-//         string
-//       ]
-//       endereco: [
-//         string
-//       ]
-//       email: [
-//         string
-//       ]
-//     }
-//   ],
-//   volume: [
-//     {
-//       servico: [
-//         string
-//       ]
-//     }
-//   ],
-//   items: [
-//     {
-//       item: [
-//         {
-//           codigo: [
-//             string
-//           ],
-//           descricao: [
-//             string
-//           ],
-//           qtde: [
-//             string
-//           ],
-//           vlr_unit: [
-//             string
-//           ]
-//         }
-//       ]
-//     }
-//   ]
-// }
-// }
+import { format, parseISO } from 'date-fns'
 interface order {
   data: string
 
@@ -79,10 +32,8 @@ export const XMLtoJSON = async (data: string) => {
 
   const json = await jsonBuilder.parseStringPromise(data)
 
-  console.log(json)
-
   const jsonStructured = {
-    data: json.root.data[0],
+    data: format(parseISO(json.root.data[0]), 'yyyy/MM/dd'),
       cliente: {
         nome: json.root.cliente[0].nome[0],
         endereco: json.root.cliente[0].endereco[0],
@@ -100,7 +51,6 @@ export const XMLtoJSON = async (data: string) => {
         }
       }
   }
-
 
   return jsonStructured
 }
