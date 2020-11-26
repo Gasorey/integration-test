@@ -7,16 +7,23 @@ class IntegrationRepository implements IIntegrationRepository {
 
     const mongoSchema = await IntegrationModel.create(data)
 
+
+    console.log(`Mongo Document Creation | FINISH | document created: ${mongoSchema._id}`)
+
     return mongoSchema
+
   }
   public async aggregate(): Promise<any>{
 
-    const mongoSchema = await IntegrationModel.aggregate([
+    const mongoAggregate = await IntegrationModel.aggregate([
       {
         $group: {_id: '$data', total: {$sum: '$items.item.vlr_unit'}}
       }
     ])
-    return mongoSchema
+
+    console.log(`MongoAggregate | Finish | ${JSON.stringify(mongoAggregate, null, 2)}`)
+
+    return mongoAggregate
 
   }
 }

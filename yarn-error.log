@@ -1,5 +1,5 @@
 Arguments: 
-  /home/asorey/.nvm/versions/node/v14.14.0/bin/node /usr/share/yarn/bin/yarn.js add @types/express-async-errors
+  /home/asorey/.nvm/versions/node/v14.14.0/bin/node /usr/share/yarn/bin/yarn.js add express-rate-limite
 
 PATH: 
   /home/asorey/.nvm/versions/node/v14.14.0/bin:/home/asorey/.zinit/polaris/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/asorey/Android/Sdk/emulator:/home/asorey/Android/Sdk/tools:/home/asorey/Android/Sdk/tools/bin:/home/asorey/Android/Sdk/platform-tools:/home/asorey/Android/Sdk/emulator:/home/asorey/Android/Sdk/tools:/home/asorey/Android/Sdk/tools/bin:/home/asorey/Android/Sdk/platform-tools
@@ -14,7 +14,7 @@ Platform:
   linux x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@types%2fexpress-async-errors: Not found
+  Error: https://registry.yarnpkg.com/express-rate-limite: Not found
       at Request.params.callback [as _callback] (/usr/share/yarn/lib/cli.js:66988:18)
       at Request.self.callback (/usr/share/yarn/lib/cli.js:140749:22)
       at Request.emit (events.js:315:20)
@@ -36,7 +36,7 @@ npm manifest:
     "license": "MIT",
     "scripts": {
       "build": "tsc",
-      "dev:server": "ts-node-dev src/shared/infra/http/server.ts",
+      "dev:server": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore node_modules src/shared/infra/http/server.ts",
       "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js"
     },
     "dependencies": {
@@ -51,8 +51,10 @@ npm manifest:
       "dotenv": "^8.2.0",
       "express": "^4.17.1",
       "express-async-errors": "^3.1.1",
+      "fast-sort": "^2.2.0",
       "mongodb": "^3.6.3",
       "mongoose": "^5.10.16",
+      "rate-limiter-flexible": "^2.1.13",
       "reflect-metadata": "^0.1.13",
       "tsyringe": "^4.4.0",
       "typeorm": "^0.2.29",
@@ -72,6 +74,7 @@ npm manifest:
       "eslint-plugin-prettier": "^3.1.4",
       "prettier": "^2.2.0",
       "ts-node-dev": "^1.0.0",
+      "tsconfig-paths": "^3.9.0",
       "typescript": "^4.1.2"
     }
   }
@@ -1173,6 +1176,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
     integrity sha1-PYpcZog6FqMMqGQ+hR8Zuqd5eRc=
   
+  fast-sort@^2.2.0:
+    version "2.2.0"
+    resolved "https://registry.yarnpkg.com/fast-sort/-/fast-sort-2.2.0.tgz#20903763531fbcbb41c9df5ab1bf5f2cefc8476a"
+    integrity sha512-W7zqnn2zsYoQA87FKmYtgOsbJohOrh7XrtZrCVHN5XZKqTBTv5UG+rSS3+iWbg/nepRQUOu+wnas8BwtK8kiCg==
+  
   fastq@^1.6.0:
     version "1.9.0"
     resolved "https://registry.yarnpkg.com/fastq/-/fastq-1.9.0.tgz#e16a72f338eaca48e91b5c23593bcc2ef66b7947"
@@ -2176,6 +2184,11 @@ Lockfile:
     version "1.2.1"
     resolved "https://registry.yarnpkg.com/range-parser/-/range-parser-1.2.1.tgz#3cf37023d199e1c24d1a55b84800c2f3e6468031"
     integrity sha512-Hrgsx+orqoygnmhFbKaHE6c296J+HTAQXoxEF6gNupROmmGJRoyzfG3ccAveqCBrwr/2yxQ5BVd/GTl5agOwSg==
+  
+  rate-limiter-flexible@^2.1.13:
+    version "2.1.13"
+    resolved "https://registry.yarnpkg.com/rate-limiter-flexible/-/rate-limiter-flexible-2.1.13.tgz#2fcbb786921518beb8aba44b44fe04a7c141db2b"
+    integrity sha512-EDzvV/ee/rCBKNL5Jw0Rr0rjneT/L4zLGgVS9xB6ShfVMkV5iviWKr+2tjzgBg5kd9by5F08C9DfXfH6v/kz3w==
   
   raw-body@2.4.0:
     version "2.4.0"

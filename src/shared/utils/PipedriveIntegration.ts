@@ -35,7 +35,9 @@ interface IPipedriveData {
   }
  }
 
-const  pipedriveParser = async (): Promise<IPipedriveData[]> => {
+const  pipedriveParser = async (): Promise<IPipedriveData[] | any> => {
+  console.log(`PipedriveParser | Start |`)
+  try{
   const response = await axios.get(`https://api.pipedrive.com/v1/deals?start=0&api_token=${process.env.PIPEDRIVER_API_KEY}`)
 
   const responseToParse = response.data.data.filter((transaction: transaction) => transaction.status === 'won')
@@ -63,8 +65,18 @@ const  pipedriveParser = async (): Promise<IPipedriveData[]> => {
       return newStructure
     })
 
+    console.log(`PipedriveParser | Finished | collected from pipedrver: ${parsedResponse.length} deals as won`)
 
     return parsedResponse
+  }catch(err){
+    const payload = {
+      status: err.response.status,
+      statusText: err.response.statusText,
+      message: 'Houve um erro na integração com Pipedrive'
+    }
+    return payload
+  }
+
 }
 
 

@@ -41,21 +41,40 @@ class IntegrationService {
 
     await connect()
 
+    let integrationStatus = {
+      blingStatus: '',
+      pipedriveStatus: ''
+     }
+
     const pipedriveData = await pipedriveParser()
 
-    const xml = pipedriveData.map((transaction) => buildXML(transaction))
+    if(Array.isArray(pipedriveData)){
 
-    const bling = await Promise.all(xml.map(async (order) => await blingPost(order)))
+      integrationStatus.pipedriveStatus = 'Dados coletados'
 
-    const createdOrders = bling.filter((order) => order.status === 201)
+      const xml = pipedriveData.map((transaction) => buildXML(transaction))
 
-    createdOrders.map(async (order) => await this.integrationMongo.create(order.data))
+      const bling = await Promise.all(xml.map(async (order) => await blingPost(order)))
+
+      const createdOrders = bling.filter((order) => order.status === 201)
+
+      if(createdOrders.length === 0){
+        integrationStatus.blingStatus = 'Nenhum pedido de venda novo'
+      } else {
+      integrationStatus.blingStatus = `${createdOrders.length} novos pedidos foram criados`
+      }
+
+      await Promise.all(createdOrders.map(async (order) => await this.integrationMongo.create(order.data)))
+    }
 
     const mongoAggregate = await this.integrationMongo.aggregate()
 
-    const formatted = AggregateFormatter(mongoAggregate)
+    const response = {
+      Consolidado: AggregateFormatter(mongoAggregate) ,
+      integrationStatus
+    }
 
-    return formatted
+    return response
   }
 }
 

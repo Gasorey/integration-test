@@ -7,8 +7,11 @@ import express from 'express'
 import cors from 'cors'
 import '@shared/container';
 import routes from '@shared/infra/http/routes'
+import apiLimit from '@shared/utils/RateLimiter'
 
 const app = express()
+
+app.use(apiLimit)
 
 app.use(cors())
 app.use(express.json())

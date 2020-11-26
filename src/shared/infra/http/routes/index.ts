@@ -3,6 +3,6 @@ import integrationRouter from '@modules/integration/infra/http/routes/integratio
 
 const routes = Router()
 
-routes.use('/integration', integrationRouter)
+routes.use('/v1/', integrationRouter)
 
 export default routes
