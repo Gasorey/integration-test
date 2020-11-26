@@ -45,8 +45,6 @@ class IntegrationService {
 
     const xml = pipedriveData.map((transaction) => buildXML(transaction))
 
-    const blingResult = blingPost(xml[0])
-
     const bling = await Promise.all(xml.map(async (order) => await blingPost(order)))
 
     const createdOrders = bling.filter((order) => order.status === 201)

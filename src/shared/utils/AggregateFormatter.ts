@@ -17,7 +17,6 @@ const AggregateFormatter = (obj:AggragateArray[]) => {
     "data"
   ])
   return newFormat
-
 }
 
 export default AggregateFormatter

@@ -53,7 +53,7 @@ const  pipedriveParser = async (): Promise<IPipedriveData[]> => {
         },
         items:{
           item: {
-            codigo: `${transaction.status + transaction.org_name + transaction.close_time + transaction.cc_email + 2}`,
+            codigo: `${transaction.status + transaction.org_name + transaction.close_time + transaction.cc_email}`,
             descricao: `Pedido de número ${index + 1}`,
             qtde: transaction.products_count,
             vlr_unit: transaction.value
